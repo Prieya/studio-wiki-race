@@ -5,15 +5,16 @@ export default class GameView extends Component {
     constructor(props){
         super(props);
         this.state = {
-            summary:"Loading....."
+            links:[]
         };
     }
     componentDidMount(){
         var self = this;
-        WikiApi.getSummary(this.props.title).then(
+        
+        WikiApi.getLinks(this.props.title).then(
             function(text){
                 self.setState({
-                    summary:text
+                    links:text
                 });
             });
     }
@@ -23,11 +24,10 @@ export default class GameView extends Component {
 
     return (
       <div>
-      <h1>{this.props.title}</h1>
-     
-     <p> {this.state.summary}</p>
-      <hr/>
-      </div>
+          <ul>
+            {this.state.links.map(n => <li style={{listStyle: 'circle', color:'red' }}> {n} <hr/> </li>) }
+          </ul>
+        </div>
     );
   }
 }
