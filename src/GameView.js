@@ -2,32 +2,44 @@ import React, { Component } from 'react';
 import WikiApi from './WikiApi.js';
 
 export default class GameView extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
-            summary:"Loading....."
+            summary: "Loading....."
         };
     }
-    componentDidMount(){
+
+    componentDidMount() {
         var self = this;
         WikiApi.getSummary(this.props.title).then(
-            function(text){
+            function(text) {
                 self.setState({
-                    summary:text
+                    summary: text
                 });
             });
     }
-  render() {
+    
+     componentDidUpdate() {
+        var self = this;
+        WikiApi.getSummary(this.props.title).then(
+            function(text) {
+                self.setState({
+                    summary: text
+                });
+            });
+    }
+    
+    render() {
 
-    var currentTitle = this.props.title;
+        var currentTitle = this.props.title;
 
-    return (
-      <div>
+        return (
+            <div>
       <h1>{this.props.title}</h1>
      
      <p> {this.state.summary}</p>
       <hr/>
       </div>
-    );
-  }
+        );
+    }
 }

@@ -25,7 +25,7 @@ export default class GameView extends Component {
     return (
       <div>
           <ul>
-            {this.state.links.map(n => <li style={{listStyle: 'circle', color:'red' }}> {n} <hr/> </li>) }
+            {this.state.links.map(n => <li style={{listStyle: 'circle' }} onClick={() => this.props.setCurrentTitle(n)}> {n} <hr/> </li>) }
           </ul>
         </div>
     );
